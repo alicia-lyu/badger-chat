@@ -39,14 +39,15 @@ export default function BadgerRegister() {
                     "password": password
                 })
             }).then((res) => {
-                res.json().then((json) => {
-                    alert(json.msg ?? "Unknow error");
-                });
-                if (res.status === 409 || res.status === 400 || res.status === 413) {
-                    console.log(res);
+                if (res.status === 409) {
+                    alert("That username has already been taken!");
                 } else if (res.status === 200) {
+                    alert("Successfully registered!");
                     navigate("/login");
                 }
+                return res.json();
+            }).then((data) => {
+                console.log(data);
             }).catch((error) => {
                 console.log(error);
             })
@@ -63,10 +64,10 @@ export default function BadgerRegister() {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>Password Confirmation</Form.Label>
+                <Form.Label>Repeat Password</Form.Label>
                 <Form.Control type="password" placeholder="Enter your password again" value={passwordConfirmation} onChange={handlePasswordConfirmationChange} />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleSubmit}>

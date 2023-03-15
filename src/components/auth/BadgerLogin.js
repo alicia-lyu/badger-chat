@@ -33,14 +33,17 @@ export default function BadgerLogin() {
                     "password": password
                 })
             }).then((res) => {
-                res.json().then((json) => {
-                    alert(json.msg ?? "Unknow error");
-                });
-                if (res.status === 401 || res.status === 400 || res.status === 404) {
-                    console.log(res);
+                if (res.status === 404) {
+                    alert("Incorrect username!");
+                } else if (res.status === 401) {
+                    alert("Incorrect password!");
                 } else if (res.status === 200) {
+                    alert("Successfully logged in!");
                     navigate("/chatrooms/Bascom");
                 }
+                return res.json();
+            }).then((data) => {
+                console.log(data);
             }).catch((error) => {
                 console.log(error);
             })
@@ -58,7 +61,7 @@ export default function BadgerLogin() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+            <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
         </Form.Group>
         <Button variant="primary" type="submit" onClick={handleSubmit}>
             Submit
