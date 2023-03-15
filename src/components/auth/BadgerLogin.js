@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import LoggedInContext from '../../contexts/LoggedInContext';
 
 
 // a large part of the file is copied from BadgerRegister component
 export default function BadgerLogin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
+
     const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
@@ -38,8 +42,9 @@ export default function BadgerLogin() {
                 } else if (res.status === 401) {
                     alert("Incorrect password!");
                 } else if (res.status === 200) {
+                    setLoggedIn(true);
                     alert("Successfully logged in!");
-                    navigate("/chatrooms/Bascom");
+                    navigate("/");
                 }
                 return res.json();
             }).then((data) => {

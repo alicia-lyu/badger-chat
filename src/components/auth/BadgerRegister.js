@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import LoggedInContext from '../../contexts/LoggedInContext';
 
 export default function BadgerRegister() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
+
     const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
@@ -43,7 +46,8 @@ export default function BadgerRegister() {
                     alert("That username has already been taken!");
                 } else if (res.status === 200) {
                     alert("Successfully registered!");
-                    navigate("/login");
+                    setLoggedIn(true);
+                    navigate("/");
                 }
                 return res.json();
             }).then((data) => {
