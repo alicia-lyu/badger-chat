@@ -23,6 +23,8 @@ function BadgerMessage(props) {
                     res.json().then((json) => setUser(json.user.username));
                 }
             })
+        } else {
+            setUser(null);
         }
     }, [loggedIn])
 
