@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import LoggedInContext from '../../contexts/LoggedInContext';
 
 export default function BadgerLogout() {
+
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext);
 
     useEffect(() => {
         fetch('https://cs571.org/s23/hw6/api/logout', {
             method: 'POST',
             headers: {
-                "X-CS571-ID": "bid_00000000000000000000"
+                "X-CS571-ID": "bid_30e5ed25e99b26f8f91c"
             },
             credentials: "include"
         }).then(res => res.json()).then(json => {
-            // Maybe you need to do something here?
+            setLoggedIn(false);
         })
     }, []);
 

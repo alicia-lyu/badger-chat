@@ -25,9 +25,9 @@ export default function BadgerLogin() {
         if (username === "" || password === "") {
             alert("You must provide both a username and password!");
         } else {
-            fetch("https://www.cs571.org/s23/hw6/api/login", {
+            fetch("https://cs571.org/s23/hw6/api/login", {
                 method: "POST",
-                credentals: "include",
+                credentials: "include",
                 headers: {
                     "X-CS571-ID": "bid_30e5ed25e99b26f8f91c",
                     "Content-Type": "application/json"
