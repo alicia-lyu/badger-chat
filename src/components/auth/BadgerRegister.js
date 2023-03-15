@@ -32,7 +32,7 @@ export default function BadgerRegister() {
             // a large part of this code snippet is copied from lecture slides
             fetch("https://www.cs571.org/s23/hw6/api/register", {
                 method: "POST",
-                credentals: "include",
+                credentials: "include",
                 headers: {
                     "X-CS571-ID": "bid_30e5ed25e99b26f8f91c",
                     "Content-Type": "application/json"
